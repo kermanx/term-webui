@@ -1,0 +1,12 @@
+[project]
+name = "term_webgui"
+version = "0.1.0"
+requires-python = ">=3.14"
+
+[tool.uv.sources]
+iterm2-webgui = { workspace = true }
+webgui-demo = { workspace = true }  # 声明本地 workspace 依赖
+webgui-protocol = { workspace = true }  # 声明本地 workspace 依赖
+
+[tool.uv.workspace]
+members = ["iterm2_webgui", "webgui_demo", "webgui_protocol"]          # 支持 glob 匹配
