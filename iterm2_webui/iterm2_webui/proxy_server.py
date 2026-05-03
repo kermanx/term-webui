@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING
 
 from aiohttp import WSMsgType, web
 
-from webgui_protocol.osc import CHUNK_SIZE, encode_osc, make_chunks
+from webui_protocol.osc import CHUNK_SIZE, encode_osc, make_chunks
 from .session_mgr import SessionManager
 
 if TYPE_CHECKING:
@@ -31,7 +31,7 @@ _INIT_HTML = """\
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>WebGUI Bridge</title>
+  <title>WebUI Bridge</title>
   <style>
     body {
       margin: 0;
@@ -55,7 +55,7 @@ _INIT_HTML = """\
 </head>
 <body>
   <div class="card">
-    <p>Terminal WebGUI Bridge</p>
+    <p>Terminal WebUI Bridge</p>
     <p class="dot">Waiting for remote CLI init&hellip;</p>
   </div>
   <script>

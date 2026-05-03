@@ -18,7 +18,7 @@ from cli import app, Todo, _todos, _next_id
 
 def _make_request(method: str, path: str, body: bytes = b""):
     """Construct a codec.bridge.Request directly from header + body."""
-    from webgui_protocol.bridge import Request
+    from webui_protocol.bridge import Request
     return Request(
         {"method": method, "path": path, "headers": {}},
         body if body else None,
@@ -56,7 +56,7 @@ def reset_todos():
 
 
 async def test_get_root_returns_html():
-    from webgui_protocol.bridge import Request
+    from webui_protocol.bridge import Request
     req = _make_request("GET", "/")
     resp = await app._dispatch_http(req)
     assert resp.status == 200

@@ -6,7 +6,7 @@ its own isolated port; the port is allocated on entry and released on exit.
 A tab may enter and exit WebView mode repeatedly.
 
 Remote CLI protocol (stdout → iTerm2):
-    ESC ] 1337 ; Custom=id=webgui-bridge:<base64(header-json)>[.<base64(body)>] BEL
+    ESC ] 1337 ; Custom=id=webui-bridge:<base64(header-json)>[.<base64(body)>] BEL
 
 Local proxy → remote CLI protocol (stdin injection via async_send_text):
     Same OSC encoding — the remote process reads raw stdin.
@@ -25,7 +25,7 @@ import re
 import iterm2
 import iterm2.notifications
 
-from webgui_protocol.osc import IDENTITY, ChunkReassembler, decode_osc_payload
+from webui_protocol.osc import IDENTITY, ChunkReassembler, decode_osc_payload
 from .proxy_server import ProxyServer
 from .session_mgr import SessionManager
 

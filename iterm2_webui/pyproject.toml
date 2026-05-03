@@ -1,12 +1,12 @@
 [project]
-name = "iterm2-webgui"
+name = "iterm2-webui"
 version = "0.1.0"
 description = "iTerm2 AutoLaunch plugin: terminal-embedded WebView bridge"
 requires-python = ">=3.10"
 dependencies = [
     "aiohttp>=3.13.5",
     "iterm2>=2.15",
-    "webgui-protocol",
+    "webui-protocol",
 ]
 
 [dependency-groups]
@@ -16,7 +16,7 @@ dev = [
 ]
 
 [tool.uv.sources]
-webgui-protocol = { workspace = true }
+webui-protocol = { workspace = true }
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"

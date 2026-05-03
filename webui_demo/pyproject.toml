@@ -1,10 +1,10 @@
 [project]
-name = "webgui-demo"
+name = "webui-demo"
 version = "0.1.0"
-description = "WebGUI Bridge demo: TODO list + WebSocket echo"
+description = "WebUI Bridge demo: TODO list + WebSocket echo"
 requires-python = ">=3.14"
 dependencies = [
-    "webgui-protocol",
+    "webui-protocol",
 ]
 
 [dependency-groups]
@@ -14,7 +14,7 @@ dev = [
 ]
 
 [tool.uv.sources]
-webgui-protocol = { workspace = true }
+webui-protocol = { workspace = true }
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"

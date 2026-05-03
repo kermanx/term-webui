@@ -1,7 +1,7 @@
 [project]
-name = "webgui-protocol"
+name = "webui-protocol"
 version = "0.1.0"
-description = "OSC 1337 escape-sequence codec and WebGUI bridge library"
+description = "OSC 1337 escape-sequence codec and WebUI bridge library"
 requires-python = ">=3.14"
 dependencies = []
 

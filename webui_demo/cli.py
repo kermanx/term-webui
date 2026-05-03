@@ -3,7 +3,7 @@
 
 Run inside an iTerm2 terminal window after the plugin is loaded:
 
-    cd /path/to/iterm2-plugin-gui/webgui_demo
+    cd /path/to/iterm2-plugin-gui/webui_demo
     uv run cli.py
 """
 import asyncio
@@ -12,9 +12,9 @@ import json
 from dataclasses import dataclass
 from pathlib import Path
 
-from webgui_protocol.bridge import WebGUIBridge, Request, Response
+from webui_protocol.bridge import WebUIBridge, Request, Response
 
-app = WebGUIBridge()
+app = WebUIBridge()
 ASSETS_DIR = Path(__file__).parent / "assets"
 
 # ---------------------------------------------------------------------------
@@ -246,7 +246,7 @@ _HTML = """\
 <header>
   <img src="/assets/todo_icon.svg" width="40" height="40" alt="todo">
   <div style="flex:1">
-    <h1>WebGUI Bridge Demo</h1>
+    <h1>WebUI Bridge Demo</h1>
     <p>via iTerm2 OSC tunnel</p>
   </div>
   <button class="btn-red" id="exit-btn">退出</button>

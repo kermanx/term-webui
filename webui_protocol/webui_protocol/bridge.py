@@ -1,4 +1,4 @@
-"""WebGUI Bridge — CLI-side library.
+"""WebUI Bridge — CLI-side library.
 
 Wraps the OSC 1337 tunnel protocol so application code never touches raw bytes.
 Binary payloads (HTTP bodies, binary WebSocket frames) are base64-encoded
@@ -6,9 +6,9 @@ exactly once by the transport layer; there is no inner re-encoding.
 
 Typical usage::
 
-    from webgui_protocol.bridge import WebGUIBridge, Request, Response
+    from webui_protocol.bridge import WebUIBridge, Request, Response
 
-    app = WebGUIBridge()
+    app = WebUIBridge()
 
     @app.route("/")
     def index(req: Request) -> Response:
@@ -60,7 +60,7 @@ from dataclasses import dataclass, field
 from typing import Any, Callable
 from urllib.parse import urlparse
 
-from webgui_protocol.osc import IDENTITY, CHUNK_SIZE, encode_osc, make_chunks
+from webui_protocol.osc import IDENTITY, CHUNK_SIZE, encode_osc, make_chunks
 
 # ---------------------------------------------------------------------------
 # OSC transport helpers (bytes layer for stdout)
@@ -262,7 +262,7 @@ def _compile_pattern(path: str) -> tuple[re.Pattern, dict[str, type]]:
 # ---------------------------------------------------------------------------
 
 
-class WebGUIBridge:
+class WebUIBridge:
     """Manages the OSC bridge event loop and routes requests to handlers."""
 
     def __init__(self) -> None:

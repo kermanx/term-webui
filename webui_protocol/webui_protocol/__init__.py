@@ -1,4 +1,4 @@
-from webgui_protocol.osc import (
+from webui_protocol.osc import (
     IDENTITY,
     CHUNK_SIZE,
     encode_osc,
@@ -6,7 +6,7 @@ from webgui_protocol.osc import (
     make_chunks,
     ChunkReassembler,
 )
-from webgui_protocol.bridge import WebGUIBridge, Request, Response
+from webui_protocol.bridge import WebUIBridge, Request, Response
 
 __all__ = [
     "IDENTITY",
@@ -15,7 +15,7 @@ __all__ = [
     "decode_osc_payload",
     "make_chunks",
     "ChunkReassembler",
-    "WebGUIBridge",
+    "WebUIBridge",
     "Request",
     "Response",
 ]

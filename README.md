@@ -1,6 +1,6 @@
-# term-webgui
+# term-webui
 
-Serve a web UI from a CLI process — displayed inside the terminal window, no browser, no ports.
+A terminal extension protocol for delivering web UIs through terminal I/O — no external browser, no ports.
 
 ## Background
 
@@ -20,42 +20,43 @@ TUIs win on **transport** — no ports, no browser, the UI follows the terminal 
 
 ### The approach
 
-Define a terminal extension protocol: the CLI exchanges HTTP and WebSocket data with the terminal emulator via standard OSC escape sequences written to stdout/stdin. The terminal emulator renders the interface in an embedded WebView and acts as a local HTTP proxy — invisible to the user.
+**Terminal WebUI Protocol** is a terminal extension: the CLI exchanges HTTP and WebSocket data with the terminal emulator via standard OSC escape sequences written to stdout/stdin. The terminal emulator renders the interface in an embedded WebView and acts as a local HTTP proxy — invisible to the user.
 
 ```
-┌─────────────┐  OSC (stdout)   ┌──────────────────┐  HTTP / WS   ┌──────────┐
-│  CLI process│ ──────────────► │ Terminal emulator │ ◄──────────► │ WebView  │
-│             │ ◄────────────── │ (local proxy)     │              │          │
-└─────────────┘  OSC (stdin)    └──────────────────┘              └──────────┘
+┌─────────────┐  OSC (stdout)  ┌───────────────────┐  HTTP / WS  ┌─────────┐
+│ CLI process │ ─────────────► │ Terminal emulator │ ◄─────────► │ WebView │
+│             │ ◄───────────── │ (local proxy)     │             │         │
+└─────────────┘  OSC (stdin)   └───────────────────┘             └─────────┘
 ```
 
 ## Repository layout
 
 ```
-webgui_protocol/   OSC codec and CLI-side HTTP/WebSocket bridge (pure Python, no terminal dependencies)
-iterm2_webgui/     iTerm2 adapter — AutoLaunch plugin implementing the terminal side of the protocol
-webgui_demo/       Demo CLI application
+webui_protocol/   OSC codec and CLI-side HTTP/WebSocket bridge (pure Python, no terminal dependencies)
+iterm2_webui/     iTerm2 adapter — AutoLaunch plugin implementing the terminal side of the protocol
+webui_demo/       Demo CLI application
 ```
 
 ```bash
 uv sync       # install all workspace dependencies
 make test     # run all tests across subprojects
-make dist     # build dist/iterm2-webgui.zip — importable via iTerm2 → Scripts → Import
+make dist     # build dist/iterm2-webui.zip — importable via iTerm2 → Scripts → Import
+make iterm2   # install iTerm2 plugin
 ```
 
-## Protocol
+## Terminal WebUI Protocol
 
 ### Wire format
 
 Every message is an OSC 1337 custom sequence:
 
 ```
-ESC ] 1337 ; Custom=id=webgui-bridge:<base64(header-json)>[.<base64(body)>] BEL
+ESC ] 1337 ; Custom=id=webui-bridge:<base64(header-json)>[.<base64(body)>] BEL
 ```
 
 | Token           | Description                                           |
 |-----------------|-------------------------------------------------------|
-| `webgui-bridge` | Fixed identity string                                 |
+| `webui-bridge` | Fixed identity string                                 |
 | `header-json`   | Compact UTF-8 JSON (`separators=(",",":")`)           |
 | `.`             | Separator — not in the base64 alphabet, unambiguous   |
 | `body`          | Raw binary payload, omitted when there is nothing to send |
@@ -170,7 +171,7 @@ header: { "type": "ws_open", "conn_id": "<hex>", "path": "/ws/echo" }
 | Header JSON            | Compact, no extra whitespace                                 |
 | Chunking threshold     | Body > 16 384 bytes                                          |
 | Re-announcement period | Every 4 s until first `http_request`                         |
-| Identity string        | `webgui-bridge` (fixed, case-sensitive)                      |
+| Identity string        | `webui-bridge` (fixed, case-sensitive)                      |
 | Sessions per tab       | At most one active WebView session per terminal tab          |
 | `ws_frame` payload     | Exactly one of: `text` field (string) or body section (bytes)|
 | Body separator         | `.` — not in the base64 alphabet (`A-Za-z0-9+/=`)           |

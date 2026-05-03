@@ -1,6 +1,6 @@
 """OSC 1337 custom-sequence encode/decode and chunked binary transport.
 
-Wire format (the portion after ``Custom=id=webgui-bridge:``):
+Wire format (the portion after ``Custom=id=webui-bridge:``):
 
     <base64(compact-json-header)>[.<base64(body)>]
 
@@ -22,7 +22,7 @@ import base64
 import json
 import uuid
 
-IDENTITY = "webgui-bridge"
+IDENTITY = "webui-bridge"
 CHUNK_SIZE = 16 * 1024
 
 # ``"."`` is not in the standard base64 alphabet (A-Za-z0-9+/=).
@@ -39,7 +39,7 @@ def encode_osc(header: dict, body: bytes | None = None) -> str:
 
 
 def decode_osc_payload(raw: str) -> tuple[dict, bytes | None] | None:
-    """Decode the OSC payload string (everything after ``id=webgui-bridge:``).
+    """Decode the OSC payload string (everything after ``id=webui-bridge:``).
 
     Returns ``(header_dict, body_bytes)`` or ``None`` on parse failure.
     ``body_bytes`` is ``None`` when no body section is present.

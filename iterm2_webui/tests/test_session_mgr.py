@@ -1,9 +1,9 @@
-"""Tests for iterm2_webgui.session_mgr — Future and Queue state machine."""
+"""Tests for iterm2_webui.session_mgr — Future and Queue state machine."""
 import asyncio
 
 import pytest
 
-from iterm2_webgui.session_mgr import SessionManager
+from iterm2_webui.session_mgr import SessionManager
 
 
 def _mgr() -> SessionManager:

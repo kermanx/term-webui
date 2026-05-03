@@ -1,4 +1,4 @@
-"""Integration tests for iterm2_webgui.proxy_server."""
+"""Integration tests for iterm2_webui.proxy_server."""
 import asyncio
 import json
 import re
@@ -6,9 +6,9 @@ import re
 import aiohttp
 import pytest
 
-from webgui_protocol.osc import IDENTITY, decode_osc_payload
-from iterm2_webgui.proxy_server import ProxyServer
-from iterm2_webgui.session_mgr import SessionManager
+from webui_protocol.osc import IDENTITY, decode_osc_payload
+from iterm2_webui.proxy_server import ProxyServer
+from iterm2_webui.session_mgr import SessionManager
 
 _OSC_RE = re.compile(
     r"\x1b\]1337;Custom=id=" + re.escape(IDENTITY) + r":([A-Za-z0-9+/=.]+)\x07"
@@ -68,7 +68,7 @@ async def test_init_page_served_directly(harness):
         assert resp.status == 200
         assert "text/html" in resp.headers["Content-Type"]
         text = await resp.text()
-    assert "WebGUI" in text
+    assert "WebUI" in text
 
 
 async def test_csp_header_present_on_init(harness):
@@ -189,7 +189,7 @@ async def test_gateway_timeout(harness):
     """If the remote never responds, the proxy returns 504 after timeout."""
     proxy, session, mgr, client, port = harness
 
-    import iterm2_webgui.proxy_server as proxy_mod
+    import iterm2_webui.proxy_server as proxy_mod
     original = proxy_mod._HTTP_TIMEOUT
     proxy_mod._HTTP_TIMEOUT = 0.05
     try:

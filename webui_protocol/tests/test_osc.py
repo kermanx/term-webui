@@ -5,7 +5,7 @@ import re
 
 import pytest
 
-from webgui_protocol.osc import (
+from webui_protocol.osc import (
     IDENTITY,
     CHUNK_SIZE,
     ChunkReassembler,
@@ -33,7 +33,7 @@ def _parse_osc(osc: str) -> tuple[dict, bytes | None] | None:
 
 def test_encode_produces_osc_wrapper():
     osc = encode_osc({"type": "init"})
-    assert osc.startswith("\x1b]1337;Custom=id=webgui-bridge:")
+    assert osc.startswith("\x1b]1337;Custom=id=webui-bridge:")
     assert osc.endswith("\x07")
 
 
